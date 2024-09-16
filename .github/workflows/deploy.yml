@@ -25,4 +25,13 @@ jobs:
         run: npm run build
 
       - name: Log files
-        run: cd dist && ls -la
+        run: cd dist && ls
+
+      - name: Copy dist to server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: 'dist/*'
+          target: '/root/my-backend-app'
