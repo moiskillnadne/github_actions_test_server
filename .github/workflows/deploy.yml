@@ -1,0 +1,33 @@
+name: Deploy to VPS
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy files to VPS
+        uses: appleboy/scp-action@v0.1.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: './*'
+          target: '/path/to/your/app' # Укажи путь до папки на сервере, куда копируются файлы
+
+      # - name: Restart PM2
+      #   uses: appleboy/ssh-action@v0.1.0
+      #   with:
+      #     host: ${{ secrets.VPS_HOST }}
+      #     username: ${{ secrets.VPS_USER }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     script: |
+      #       cd /path/to/your/app # Укажи путь к твоему приложению
+      #       nvm use
+      #       npm install
+      #       npm run build
+      #       pm2 start your-app-name
