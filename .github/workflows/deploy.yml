@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: './*'
-          target: '/path/to/your/app' # Укажи путь до папки на сервере, куда копируются файлы
+          target: '/root/server-app/' # Укажи путь до папки на сервере, куда копируются файлы
 
       # - name: Restart PM2
       #   uses: appleboy/ssh-action@v0.1.0
