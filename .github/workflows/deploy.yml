@@ -32,3 +32,4 @@ jobs:
             nvm install
             npm install
             npm run build
+            pm2 restart /root/server-app/dist/app.js
